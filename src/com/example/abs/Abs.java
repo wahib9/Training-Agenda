@@ -1,17 +1,21 @@
 package com.example.abs;
 
+import java.util.ArrayList;
+
 import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AnalogClock;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class Abs extends ActionBarActivity {
@@ -20,8 +24,9 @@ public class Abs extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_abs);
-
+		
 		android.app.ActionBar ab = getActionBar();
 		ab.setDisplayShowTitleEnabled(false);
 		ab.setHomeButtonEnabled(true);
@@ -78,6 +83,22 @@ public class Abs extends ActionBarActivity {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_abs, container,
 					false);
+			ListView lv1 = (ListView)rootView.findViewById(R.id.listView1);
+			final ArrayList<data> obj = new ArrayList<data>();
+			obj.add(new data(1,"Addicted", "Enrique"));
+			obj.add(new data(1,"Jai Ho", "A.R Rehman"));
+			
+			custom_adapter cd = new custom_adapter(getActivity(), R.layout.row, obj);
+			lv1.setAdapter(cd);
+			final Context c = getActivity();
+			OnItemClickListener mMessageClickedHandler = new OnItemClickListener() 
+			{
+				public void onItemClick(AdapterView parent, View v, int position, long id) {
+					Toast.makeText(c, ""+obj.get(position).getName()+"\t"+obj.get(position).getPh(), 
+							   Toast.LENGTH_SHORT).show();
+				}
+			};
+			lv1.setOnItemClickListener(mMessageClickedHandler);
 			return rootView;
 		}
 	}
@@ -92,6 +113,15 @@ public class Abs extends ActionBarActivity {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_abs1, container,
 					false);
+			
+			ListView lv1 = (ListView)rootView.findViewById(R.id.listView2);
+			
+			ArrayList<data> obj = new ArrayList<data>();
+			obj.add(new data(1,"Captain America", "1st May 2014"));
+			obj.add(new data(1,"Spiderman 2", "14th May 2014"));
+			
+			custom_adapter cd = new custom_adapter(getActivity(), R.layout.row, obj);
+			lv1.setAdapter(cd);
 			return rootView;
 		}
 	}
@@ -126,7 +156,7 @@ public class Abs extends ActionBarActivity {
 	            mFragment = android.app.Fragment.instantiate(mActivity, mClass.getName());
 	            ft.add(android.R.id.content, mFragment, mTag);
 	        } else {
-	            // If it exists, simply attach it in order to show it
+	            // If it exists, simply attach it in order to show it	        
 	            ft.attach(mFragment);
 	        }
 		}
