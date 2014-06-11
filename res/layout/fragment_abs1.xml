@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="160dp"
-        android:text="Music"
+        android:text="Movies"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
