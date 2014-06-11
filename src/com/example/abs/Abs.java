@@ -1,5 +1,5 @@
 package com.example.abs;
-// sohaib changes
+
 import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.FragmentTransaction;
@@ -18,13 +18,10 @@ public class Abs extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_abs);
 
-		/*if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}*/
 		android.app.ActionBar ab = getActionBar();
 		ab.setDisplayShowTitleEnabled(false);
 		ab.setHomeButtonEnabled(true);
